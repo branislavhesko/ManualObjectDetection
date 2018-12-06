@@ -7,3 +7,5 @@
 *.avi
 *.mp4
 *.tlog
+*.idb
+*.pch
