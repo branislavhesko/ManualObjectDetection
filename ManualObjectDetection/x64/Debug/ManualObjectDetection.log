@@ -1,4 +1,0 @@
-﻿  ManualObjectDetection.cpp
-  cvui.h: implementation skipped. Ensure one of your C++ files included cvui.h after a #define CVUI_IMPLEMENTATION. See: https://dovyski.github.io/cvui/usage/
-  cvui.h: compiling implementation because of CVUI_IMPLEMENTATION. See: https://dovyski.github.io/cvui/usage/
-  ManualObjectDetection.vcxproj -> C:\Users\Branislav Hesko\Documents\phd_works\ManualObjectDetection\x64\Debug\ManualObjectDetection.exe

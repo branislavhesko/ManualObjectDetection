@@ -1,4 +1,0 @@
-Auto
-Person
-Traffic light
-Traffic sign
