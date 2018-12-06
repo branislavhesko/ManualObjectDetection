@@ -31,5 +31,6 @@ private:
 	std::vector<bool*> categoryChecker;
 	const std::string classPickerFrameName = "Class picker";
 	cv::Mat frame;
+	void inicializeCategoryChecker();
 };
 

@@ -1,1 +1,6 @@
 .vs/*
+*.tlog
+*.log
+*.obj
+*.ilk
+*.pdb
