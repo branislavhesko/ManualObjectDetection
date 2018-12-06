@@ -17,7 +17,7 @@ public:
 	}
 	cv::Mat &getNextFrame();
 private:
-	cv::VideoCapture *video;
+	cv::VideoCapture video;
 	int width;
 	int height;
 	int step;

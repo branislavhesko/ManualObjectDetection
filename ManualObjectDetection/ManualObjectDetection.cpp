@@ -11,7 +11,7 @@ int main()
 	//const cv::String windows[] = { WINDOW1_NAME, WINDOW2_NAME, WINDOW3_NAME, WINDOW4_NAME };
 	//cvui::init(windows, 4);
 	Application app(WindowSize(800, 600));
-	app.run("skuska.avi");
+	app.run("./video.mp4");
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

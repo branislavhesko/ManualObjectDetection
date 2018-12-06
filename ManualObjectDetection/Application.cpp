@@ -12,6 +12,7 @@ Application::~Application()
 	for (auto *flag : categoryChecker) {
 		delete flag;
 	}
+	delete videoLoader;
 }
 
 Application::Application(const WindowSize size)
@@ -25,9 +26,16 @@ void Application::run(const std::string & videoFilePath)
 	loader.loadClasses();
 	inicializeCategoryChecker();
 
-	std::cout << pickClass() << std::endl;
-
 	
+	for (int i = 0; i < 10; i++) {
+		cv::namedWindow("skuska");
+		cv::imshow("skuska", videoLoader->getNextFrame());
+		if (cv::waitKey(20000) == 27) {
+			break;
+		}
+		cv::destroyWindow("skuska");
+	}
+
 }
 
 std::string & Application::pickClass()
