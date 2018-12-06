@@ -10,10 +10,13 @@ FrameLoader::FrameLoader(const std::string &videofilename, int step)
 	this->step = step;
 }
 
+FrameLoader::FrameLoader()
+{
+}
+
 
 FrameLoader::~FrameLoader()
 {
-	video->release();
 	delete video;
 }
 

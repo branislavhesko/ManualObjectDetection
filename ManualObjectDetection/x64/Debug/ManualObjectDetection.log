@@ -1,13 +1,9 @@
-﻿  pch.cpp
-  Application.cpp
+﻿  Application.cpp
   cvui.h: implementation skipped. Ensure one of your C++ files included cvui.h after a #define CVUI_IMPLEMENTATION. See: https://dovyski.github.io/cvui/usage/
-c:\users\branislav hesko\documents\phd_works\manualobjectdetection\manualobjectdetection\application.cpp(25): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-c:\users\branislav hesko\documents\phd_works\manualobjectdetection\manualobjectdetection\application.cpp(46): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
-  ClassLoader.cpp
-  FrameLoader.cpp
+c:\users\branislav hesko\documents\phd_works\manualobjectdetection\manualobjectdetection\application.cpp(39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\branislav hesko\documents\phd_works\manualobjectdetection\manualobjectdetection\application.cpp(41): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
   ManualObjectDetection.cpp
   cvui.h: implementation skipped. Ensure one of your C++ files included cvui.h after a #define CVUI_IMPLEMENTATION. See: https://dovyski.github.io/cvui/usage/
   cvui.h: compiling implementation because of CVUI_IMPLEMENTATION. See: https://dovyski.github.io/cvui/usage/
-  Writer.cpp
   Generating Code...
   ManualObjectDetection.vcxproj -> C:\Users\Branislav Hesko\Documents\phd_works\ManualObjectDetection\x64\Debug\ManualObjectDetection.exe

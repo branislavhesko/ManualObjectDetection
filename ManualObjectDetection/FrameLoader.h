@@ -7,6 +7,7 @@ class FrameLoader
 {
 public:
 	FrameLoader(const std::string &videofile, int step);
+	FrameLoader();
 	~FrameLoader();
 	const int getWidth() const {
 		return width;

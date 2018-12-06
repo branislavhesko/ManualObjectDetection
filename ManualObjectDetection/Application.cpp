@@ -21,17 +21,33 @@ Application::Application(const WindowSize size)
 
 void Application::run(const std::string & videoFilePath)
 {
+	videoLoader = new FrameLoader(videoFilePath, 100);
 	loader.loadClasses();
 	inicializeCategoryChecker();
-	frame = cv::Mat((1 + loader.getClasses().size()) * 100, 400, CV_8UC3);
+
+	std::cout << pickClass() << std::endl;
+
+	
+}
+
+std::string & Application::pickClass()
+{
 	cv::namedWindow(classPickerFrameName);
 	cv::moveWindow(classPickerFrameName, 1000, 100);
 	cvui::init(classPickerFrameName);
 	cvui::watch(classPickerFrameName);
-	bool value = false;
+	cv::Mat frame = cv::Mat((1 + loader.getClasses().size()) * 100, 400, CV_8UC3);
 	while (true) {
-		// TODO: repair this ...
-		getClassFrame();
+		unsigned int size = loader.getClasses().size();
+		frame = cv::Scalar(49, 52, 49);
+		int i = 0;
+		for (auto entry : loader.getClasses()) {
+			cvui::checkbox(frame, 50, i * 100 + 50, entry, categoryChecker[i]);
+			i++;
+		}
+		if (cvui::button(frame, 50, i * 100 + 50, "PRESS OK")) {
+			break;
+		}
 		cvui::update();
 		// Show everything on the screen
 		cv::imshow(classPickerFrameName, frame);
@@ -40,21 +56,23 @@ void Application::run(const std::string & videoFilePath)
 			break;
 		}
 	}
+	return getPickedClassName();
 }
 
-void Application::getClassFrame()
+std::string & Application::getPickedClassName()
 {
-	unsigned int size = loader.getClasses().size();
-	frame = cv::Scalar(49, 52, 49);
-	int i = 0;
-	for (auto entry : loader.getClasses()) {
-		cvui::checkbox(frame, 50, i * 100 + 50, entry, categoryChecker[i]);
-		i++;
+	static std::string pickedClass;
+	for (int i = 0; i < categoryChecker.size(); i++) {
+		if (*categoryChecker[i] == true) {
+			pickedClass = loader.getClasses()[i];
+		}
+		*categoryChecker[i] = false;
 	}
-	if (cvui::button(frame, 50, i * 100 + 50, "PRESS OK")) {
-	
-	}
+	return pickedClass;
+}
 
+void Application::depictBoundingBox()
+{
 }
 
 void Application::inicializeCategoryChecker()

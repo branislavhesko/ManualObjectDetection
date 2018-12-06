@@ -5,6 +5,7 @@
 #include "opencv2/opencv.hpp"
 #include "cvui.h"
 #include "ClassLoader.h"
+#include "FrameLoader.h"
 
 
 struct WindowSize {
@@ -23,14 +24,16 @@ public:
 	~Application();
 	Application(const WindowSize size);
 	void run(const std::string &videoFilePath);
-
 private:
+	FrameLoader *videoLoader;
 	ClassLoader loader;
 	WindowSize size = WindowSize(640, 480);
-	void getClassFrame();
 	std::vector<bool*> categoryChecker;
 	const std::string classPickerFrameName = "Class picker";
-	cv::Mat frame;
+
 	void inicializeCategoryChecker();
+	std::string & pickClass();
+	std::string & getPickedClassName();
+	void depictBoundingBox();
 };
 
