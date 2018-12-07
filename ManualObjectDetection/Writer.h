@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 #include <fstream>
 
 struct BoundingBox {
@@ -28,5 +29,6 @@ public:
 	bool writeBoundingBox(const BoundingBox &box);
 private:
 	const std::string FILETOSAVE = "./detected.txt";
+	std::fstream file;
 };
 

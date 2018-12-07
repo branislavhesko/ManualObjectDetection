@@ -81,6 +81,14 @@ std::string & Application::getPickedClassName()
 
 void Application::depictBoundingBox()
 {
+	cv::namedWindow(boundingBoxPickerWindowName);
+	while (true) {
+		if (cv::waitKey(30) == 27) {
+			break;
+		}
+		cv::setMouseCallback(boundingBoxPickerWindowName, mouseCallbackFunction);
+
+	}
 }
 
 void Application::inicializeCategoryChecker()
@@ -89,3 +97,5 @@ void Application::inicializeCategoryChecker()
 		categoryChecker.push_back(new bool(false));
 	}
 }
+
+

@@ -13,11 +13,13 @@ Writer::~Writer()
 
 Writer::Writer(const std::string & filename)
 {
-	std::fstream file;
 	file.open(FILETOSAVE, std::ios::app);
 }
 
 bool Writer::writeBoundingBox(const BoundingBox & box)
 {
-	return false;
+	std::string line = box.filename + "\t" + box.objectClass + "\t" + std::to_string(box.x) + "\t" + 
+		std::to_string(box.y) + "\t" + std::to_string(box.width) + "\t" + std::to_string(box.height) + "\n";
+	file >> line;
+	return true;
 }

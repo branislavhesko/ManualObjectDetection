@@ -6,7 +6,7 @@
 #include "cvui.h"
 #include "ClassLoader.h"
 #include "FrameLoader.h"
-
+#include "mouseCallback.h"
 
 struct WindowSize {
 	unsigned int width;
@@ -29,6 +29,8 @@ private:
 	ClassLoader loader;
 	WindowSize size = WindowSize(640, 480);
 	std::vector<bool*> categoryChecker;
+
+	const std::string boundingBoxPickerWindowName = "Bounding box picker";
 	const std::string classPickerFrameName = "Class picker";
 
 	void inicializeCategoryChecker();
@@ -36,4 +38,5 @@ private:
 	std::string & getPickedClassName();
 	void depictBoundingBox();
 };
+
 

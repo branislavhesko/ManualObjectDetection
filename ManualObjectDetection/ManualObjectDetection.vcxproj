@@ -155,6 +155,7 @@
     <ClInclude Include="ClassLoader.h" />
     <ClInclude Include="cvui.h" />
     <ClInclude Include="FrameLoader.h" />
+    <ClInclude Include="mouseCallback.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Writer.h" />
   </ItemGroup>
