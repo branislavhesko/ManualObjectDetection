@@ -15,11 +15,15 @@ public:
 	const int getHeight() const {
 		return height;
 	}
+	const std::string &getVideoName() const {
+		return videoName;
+	}
 	cv::Mat &getNextFrame();
 private:
 	cv::VideoCapture video;
 	int width;
 	int height;
 	int step;
+	std::string videoName;
 };
 

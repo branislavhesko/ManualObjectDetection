@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <vector>
@@ -36,7 +36,7 @@ private:
 	void inicializeCategoryChecker();
 	std::string & pickClass();
 	std::string & getPickedClassName();
-	void depictBoundingBox();
+	cv::Rect depictBoundingBox(cv::Mat & frame);
 };
 
 

@@ -25,16 +25,8 @@ void Application::run(const std::string & videoFilePath)
 	videoLoader = new FrameLoader(videoFilePath, 100);
 	loader.loadClasses();
 	inicializeCategoryChecker();
+	depictBoundingBox(videoLoader->getNextFrame());
 
-	
-	for (int i = 0; i < 10; i++) {
-		cv::namedWindow("skuska");
-		cv::imshow("skuska", videoLoader->getNextFrame());
-		if (cv::waitKey(20000) == 27) {
-			break;
-		}
-		cv::destroyWindow("skuska");
-	}
 
 }
 
@@ -79,16 +71,25 @@ std::string & Application::getPickedClassName()
 	return pickedClass;
 }
 
-void Application::depictBoundingBox()
+cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 {
+	cv::Mat frameWithRectangle;
 	cv::namedWindow(boundingBoxPickerWindowName);
+	MouseCallbackDataStructure ms(0, 0, 0, 0);
+	cvui::init(boundingBoxPickerWindowName);
 	while (true) {
+
+		frameWithRectangle = frame.clone();
+		cv::setMouseCallback(boundingBoxPickerWindowName, mouseCallbackFunction, &ms);
+
+		cvui::update();
+		cv::rectangle(frameWithRectangle, ms.toRectangle(), cv::Scalar(0, 255, 0));
+		cv::imshow(boundingBoxPickerWindowName, frameWithRectangle);
 		if (cv::waitKey(30) == 27) {
 			break;
 		}
-		cv::setMouseCallback(boundingBoxPickerWindowName, mouseCallbackFunction);
-
 	}
+	return ms.toRectangle();
 }
 
 void Application::inicializeCategoryChecker()
