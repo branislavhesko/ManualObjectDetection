@@ -20,6 +20,9 @@ bool Writer::writeBoundingBox(const BoundingBox & box)
 {
 	std::string line = box.filename + "\t" + box.objectClass + "\t" + std::to_string(box.x) + "\t" + 
 		std::to_string(box.y) + "\t" + std::to_string(box.width) + "\t" + std::to_string(box.height) + "\n";
-	file >> line;
+	std::cout << line << std::endl;
+	file << line;
+	file.close();
 	return true;
+
 }

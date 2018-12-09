@@ -1,0 +1,2 @@
+Class picker	Traffic light	267	195	321	336
+skuska	Auto	20	9	557	736

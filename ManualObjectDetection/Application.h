@@ -7,6 +7,7 @@
 #include "ClassLoader.h"
 #include "FrameLoader.h"
 #include "mouseCallback.h"
+#include "Writer.h"
 
 struct WindowSize {
 	unsigned int width;
@@ -37,6 +38,7 @@ private:
 	std::string & pickClass();
 	std::string & getPickedClassName();
 	cv::Rect depictBoundingBox(cv::Mat & frame);
+	Writer *writer;
 };
 
 

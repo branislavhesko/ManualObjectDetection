@@ -25,8 +25,11 @@ void Application::run(const std::string & videoFilePath)
 	videoLoader = new FrameLoader(videoFilePath, 100);
 	loader.loadClasses();
 	inicializeCategoryChecker();
-	depictBoundingBox(videoLoader->getNextFrame());
-
+	cv::Rect rect = depictBoundingBox(videoLoader->getNextFrame());
+	std::string objectClass = pickClass();
+	writer = new Writer("sadad.txt");
+	writer->writeBoundingBox(BoundingBox("skuska", objectClass, rect.x, rect.y, rect.width, rect.height));
+	delete writer;
 
 }
 
@@ -75,6 +78,7 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 {
 	cv::Mat frameWithRectangle;
 	cv::namedWindow(boundingBoxPickerWindowName);
+	cv::moveWindow(boundingBoxPickerWindowName, 100, 100);
 	MouseCallbackDataStructure ms(0, 0, 0, 0);
 	cvui::init(boundingBoxPickerWindowName);
 	while (true) {
