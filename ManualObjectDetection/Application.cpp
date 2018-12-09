@@ -28,7 +28,7 @@ void Application::run(const std::string & videoFilePath)
 	cv::Rect rect = depictBoundingBox(videoLoader->getNextFrame());
 	std::string objectClass = pickClass();
 	writer = new Writer("sadad.txt");
-	writer->writeBoundingBox(BoundingBox("skuska", objectClass, rect.x, rect.y, rect.width, rect.height));
+	writer->writeBoundingBox(BoundingBox("skuska", objectClass, rect));
 	delete writer;
 
 }
@@ -40,15 +40,20 @@ std::string & Application::pickClass()
 	cvui::init(classPickerFrameName);
 	cvui::watch(classPickerFrameName);
 	cv::Mat frame = cv::Mat((1 + loader.getClasses().size()) * 100, 400, CV_8UC3);
+	addAnotherObject = false;
 	while (true) {
 		unsigned int size = loader.getClasses().size();
 		frame = cv::Scalar(49, 52, 49);
 		int i = 0;
-		for (auto entry : loader.getClasses()) {
+		for (const auto entry : loader.getClasses()) {
 			cvui::checkbox(frame, 50, i * 100 + 50, entry, categoryChecker[i]);
 			i++;
 		}
-		if (cvui::button(frame, 50, i * 100 + 50, "PRESS OK")) {
+		if (cvui::button(frame, 220, i * 100 + 50, "ALL OBJECTS FOUND")) {
+			break;
+		}
+		if (cvui::button(frame, 50, i * 100 + 50, "ADD ANOTHER")) {
+			addAnotherObject = true;
 			break;
 		}
 		cvui::update();
@@ -59,6 +64,7 @@ std::string & Application::pickClass()
 			break;
 		}
 	}
+	cv::destroyWindow(classPickerFrameName);
 	return getPickedClassName();
 }
 

@@ -1,2 +1,2 @@
-Class picker	Traffic light	267	195	321	336
-skuska	Auto	20	9	557	736
+skuska	Auto	298	242	240	245
+skuska	Person	262	178	283	275

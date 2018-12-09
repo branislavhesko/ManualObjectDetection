@@ -22,7 +22,5 @@ bool Writer::writeBoundingBox(const BoundingBox & box)
 		std::to_string(box.y) + "\t" + std::to_string(box.width) + "\t" + std::to_string(box.height) + "\n";
 	std::cout << line << std::endl;
 	file << line;
-	file.close();
 	return true;
-
 }
