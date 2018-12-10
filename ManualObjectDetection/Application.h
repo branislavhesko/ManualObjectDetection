@@ -30,11 +30,11 @@ private:
 	ClassLoader loader;
 	WindowSize size = WindowSize(640, 480);
 	std::vector<bool*> categoryChecker;
-	bool addAnotherObject;
+	bool addAnotherObject, endApplication=false;
 
 	const std::string boundingBoxPickerWindowName = "Bounding box picker";
 	const std::string classPickerFrameName = "Class picker";
-
+	void processFrame(cv::Mat &frame);
 	void inicializeCategoryChecker();
 	std::string & pickClass();
 	std::string & getPickedClassName();

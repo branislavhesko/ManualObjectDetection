@@ -24,11 +24,11 @@ void Application::run(const std::string & videoFilePath)
 {
 	videoLoader = new FrameLoader(videoFilePath, 100);
 	loader.loadClasses();
+	writer = new Writer("./detected.csv");
 	inicializeCategoryChecker();
-	cv::Rect rect = depictBoundingBox(videoLoader->getNextFrame());
-	std::string objectClass = pickClass();
-	writer = new Writer("sadad.txt");
-	writer->writeBoundingBox(BoundingBox("skuska", objectClass, rect));
+	while (!endApplication) {
+		processFrame(videoLoader->getNextFrame());
+	}
 	delete writer;
 
 }
@@ -39,7 +39,7 @@ std::string & Application::pickClass()
 	cv::moveWindow(classPickerFrameName, 1000, 100);
 	cvui::init(classPickerFrameName);
 	cvui::watch(classPickerFrameName);
-	cv::Mat frame = cv::Mat((1 + loader.getClasses().size()) * 100, 400, CV_8UC3);
+	cv::Mat frame = cv::Mat((2 + loader.getClasses().size()) * 100, 400, CV_8UC3);
 	addAnotherObject = false;
 	while (true) {
 		unsigned int size = loader.getClasses().size();
@@ -54,6 +54,10 @@ std::string & Application::pickClass()
 		}
 		if (cvui::button(frame, 50, i * 100 + 50, "ADD ANOTHER")) {
 			addAnotherObject = true;
+			break;
+		}
+		if (cvui::button(frame, 50, (i +1 ) * 100 + 50, "END APPLICATION")) {
+			endApplication = true;
 			break;
 		}
 		cvui::update();
@@ -100,6 +104,18 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 		}
 	}
 	return ms.toRectangle();
+}
+
+void Application::processFrame(cv::Mat & frame)
+{
+	while (true) {
+		cv::Rect rect = depictBoundingBox(frame);
+		std::string objectClass = pickClass();
+		writer->writeBoundingBox(BoundingBox(videoLoader->getVideoName(), videoLoader->getFrameNumber(), objectClass, rect));
+		if (!addAnotherObject) {
+			break;
+		}
+	}
 }
 
 void Application::inicializeCategoryChecker()
