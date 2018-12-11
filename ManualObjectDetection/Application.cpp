@@ -74,7 +74,7 @@ std::string & Application::pickClass()
 
 std::string & Application::getPickedClassName()
 {
-	static std::string pickedClass;
+	static std::string pickedClass = "None";
 	for (int i = 0; i < categoryChecker.size(); i++) {
 		if (*categoryChecker[i] == true) {
 			pickedClass = loader.getClasses()[i];

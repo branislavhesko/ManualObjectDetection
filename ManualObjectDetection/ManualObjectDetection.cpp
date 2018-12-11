@@ -6,12 +6,17 @@
 #include "cvui.h"
 
 
-int main()
+int main(int argc, char **argv)
 {
 	//const cv::String windows[] = { WINDOW1_NAME, WINDOW2_NAME, WINDOW3_NAME, WINDOW4_NAME };
 	//cvui::init(windows, 4);
 	Application app(WindowSize(800, 600));
-	app.run("./video.mp4");
+	std::string videoFile = "./video.mp4";
+	if (argc > 1) {
+		videoFile = argv[1];
+	}
+
+	app.run(videoFile);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
