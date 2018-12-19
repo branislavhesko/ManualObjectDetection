@@ -15,6 +15,10 @@ int main(int argc, char **argv)
 	if (argc > 1) {
 		videoFile = argv[1];
 	}
+	int secondToStart = 0;
+	if (argc > 2) {
+		secondToStart = std::stoi(argv[2]);
+	}
 
 	app.run(videoFile);
 }

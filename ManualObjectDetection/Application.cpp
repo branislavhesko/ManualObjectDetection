@@ -45,7 +45,7 @@ std::string & Application::pickClass()
 		unsigned int size = loader.getClasses().size();
 		frame = cv::Scalar(49, 52, 49);
 		int i = 0;
-		for (const auto entry : loader.getClasses()) {
+		for (const auto &entry : loader.getClasses()) {
 			cvui::checkbox(frame, 50, i * 100 + 50, entry, categoryChecker[i]);
 			i++;
 		}
