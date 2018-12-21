@@ -2,7 +2,7 @@
 #include "FrameLoader.h"
 
 
-FrameLoader::FrameLoader(const std::string &videofilename, int step)
+FrameLoader::FrameLoader(const std::string &videofilename, int secondToStart, int stepSeconds)
 {
 	videoName = fs::path(videofilename).stem().string();
 	std::cout << videoName << std::endl;
@@ -13,7 +13,9 @@ FrameLoader::FrameLoader(const std::string &videofilename, int step)
 	width = video.get(CV_CAP_PROP_FRAME_WIDTH);
 	height = video.get(CV_CAP_PROP_FRAME_HEIGHT);
 	numberOfFrames = video.get(CV_CAP_PROP_FRAME_COUNT);
-	this->step = step;
+	double fps = video.get(CV_CAP_PROP_FPS);
+	video.set(CV_CAP_PROP_POS_FRAMES, secondToStart * fps);
+	this->step = stepSeconds * int(fps);
 }
 
 FrameLoader::FrameLoader()

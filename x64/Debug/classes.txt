@@ -1,0 +1,7 @@
+Auto
+Person
+Traffic light
+Traffic sign
+PC
+Computer
+Standalone

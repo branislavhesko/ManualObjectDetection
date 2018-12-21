@@ -24,7 +24,7 @@ public:
 	Application();
 	~Application();
 	Application(const WindowSize size);
-	void run(const std::string &videoFilePath);
+	void run(const std::string &videoFilePath, int secondToStart, int step);
 private:
 	FrameLoader *videoLoader;
 	ClassLoader loader;

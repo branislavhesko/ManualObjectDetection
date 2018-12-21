@@ -20,9 +20,9 @@ Application::Application(const WindowSize size)
 
 }
 
-void Application::run(const std::string & videoFilePath)
+void Application::run(const std::string & videoFilePath, int secondToStart, int step)
 {
-	videoLoader = new FrameLoader(videoFilePath, 100);
+	videoLoader = new FrameLoader(videoFilePath, secondToStart, step);
 	loader.loadClasses();
 	writer = new Writer("./detected.csv");
 	inicializeCategoryChecker();
@@ -108,6 +108,9 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 
 void Application::processFrame(cv::Mat & frame)
 {
+	if (frame.size().height == 0 | frame.size().width == 0) {
+		exit(-1);
+	}
 	while (true) {
 		cv::Rect rect = depictBoundingBox(frame);
 		std::string objectClass = pickClass();

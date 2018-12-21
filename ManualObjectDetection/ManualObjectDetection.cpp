@@ -11,16 +11,21 @@ int main(int argc, char **argv)
 	//const cv::String windows[] = { WINDOW1_NAME, WINDOW2_NAME, WINDOW3_NAME, WINDOW4_NAME };
 	//cvui::init(windows, 4);
 	Application app(WindowSize(800, 600));
-	std::string videoFile = "./video.mp4";
+	std::string videoFile = "./exp10ms.avi";
 	if (argc > 1) {
-		videoFile = argv[1];
+		videoFile = std::string(argv[1]);
+		std::cout << videoFile << std::endl;
 	}
 	int secondToStart = 0;
+	int stepSeconds = 1;
 	if (argc > 2) {
 		secondToStart = std::stoi(argv[2]);
 	}
+	if (argc > 3) {
+		stepSeconds = std::stoi(argv[3]);
+	}
 
-	app.run(videoFile);
+	app.run(videoFile, secondToStart, stepSeconds);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

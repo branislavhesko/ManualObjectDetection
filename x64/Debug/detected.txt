@@ -32,3 +32,10 @@ exp10ms	10	None	392	494	43	136
 exp10ms	10	None	413	209	239	418
 exp10ms	20	None	0	0	0	0
 exp10ms	100	None	192	176	435	489
+exp10ms	10	Computer	157	199	406	374
+exp10ms	10	Computer	186	144	499	513
+exp10ms	20	Computer	253	262	486	463
+exp10ms	30	Computer	523	182	292	336
+exp10ms	40	Computer	257	139	308	549
+exp10ms	50	Computer	0	0	0	0
+exp10ms	60	Computer	0	0	0	0

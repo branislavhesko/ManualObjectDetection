@@ -9,7 +9,7 @@ namespace fs = std::experimental::filesystem;
 class FrameLoader
 {
 public:
-	FrameLoader(const std::string &videofile, int step);
+	FrameLoader(const std::string &videofile, int secondToStart, int stepSeconds);
 	FrameLoader();
 	~FrameLoader();
 	const int getWidth() const {
