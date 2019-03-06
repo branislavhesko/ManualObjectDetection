@@ -10,11 +10,11 @@ FrameLoader::FrameLoader(const std::string &videofilename, int secondToStart, in
 	if (!video.isOpened()) {
 		exit(-5116);
 	}
-	width = video.get(CV_CAP_PROP_FRAME_WIDTH);
-	height = video.get(CV_CAP_PROP_FRAME_HEIGHT);
-	numberOfFrames = video.get(CV_CAP_PROP_FRAME_COUNT);
-	double fps = video.get(CV_CAP_PROP_FPS);
-	video.set(CV_CAP_PROP_POS_FRAMES, secondToStart * fps);
+	width = video.get(cv::CAP_PROP_FRAME_WIDTH);
+	height = video.get(cv::CAP_PROP_FRAME_HEIGHT);
+	numberOfFrames = video.get(cv::CAP_PROP_FRAME_COUNT);
+	double fps = video.get(cv::CAP_PROP_FPS);
+	video.set(cv::CAP_PROP_POS_FRAMES, secondToStart * fps);
 	this->step = stepSeconds * int(fps);
 }
 

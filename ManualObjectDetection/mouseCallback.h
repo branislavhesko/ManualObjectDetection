@@ -24,20 +24,20 @@ inline void mouseCallbackFunction(int event, int x, int y, int flag, void *param
 
 	MouseCallbackDataStructure *ms = static_cast<MouseCallbackDataStructure *> (param);
 
-	if (event == CV_EVENT_LBUTTONDOWN) {
+	if (event == cv::EVENT_LBUTTONDOWN) {
 		ms->x = x;
 		ms->y = y;
 		ms->width = 0;
 		ms->height = 0;
 		ms->leftButtonDown = true;
 	}
-	else if (event == CV_EVENT_LBUTTONUP) {
+	else if (event == cv::EVENT_LBUTTONUP) {
 		ms->leftButtonDown = false;
 		ms->rectangleIsDepicted = true;
 		ms->width = x - ms->x;
 		ms->height = y - ms->y;
 	}
-	else if (event == CV_EVENT_MOUSEMOVE) {
+	else if (event == cv::EVENT_MOUSEMOVE) {
 		if (ms->leftButtonDown) {
 			ms->width = x - ms->x;
 			ms->height = y - ms->y;

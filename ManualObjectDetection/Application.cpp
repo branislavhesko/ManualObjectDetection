@@ -2,9 +2,7 @@
 #include "Application.h"
 
 
-Application::Application()
-{
-}
+Application::Application() = default;
 
 
 Application::~Application()
@@ -38,13 +36,14 @@ std::string & Application::pickClass()
 	cv::namedWindow(classPickerFrameName);
 	cv::moveWindow(classPickerFrameName, 1000, 100);
 	cvui::init(classPickerFrameName);
-	cvui::watch(classPickerFrameName);
+	//cvui::watch(classPickerFrameName);
 	cv::Mat frame = cv::Mat((2 + loader.getClasses().size()) * 100, 400, CV_8UC3);
+	unsigned int size = loader.getClasses().size();
 	addAnotherObject = false;
-	while (true) {
-		unsigned int size = loader.getClasses().size();
+	int i = 0;
+	while (cv::waitKey(20) != 27) {
 		frame = cv::Scalar(49, 52, 49);
-		int i = 0;
+		i = 0;
 		for (const auto &entry : loader.getClasses()) {
 			cvui::checkbox(frame, 50, i * 100 + 50, entry, categoryChecker[i]);
 			i++;
@@ -63,10 +62,6 @@ std::string & Application::pickClass()
 		cvui::update();
 		// Show everything on the screen
 		cv::imshow(classPickerFrameName, frame);
-		// Check if ESC key was pressed
-		if (cv::waitKey(20) == 27) {
-			break;
-		}
 	}
 	cv::destroyWindow(classPickerFrameName);
 	return getPickedClassName();
@@ -103,6 +98,7 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 			break;
 		}
 	}
+	cv::setMouseCallback(boundingBoxPickerWindowName, nullptr, nullptr);
 	return ms.toRectangle();
 }
 
