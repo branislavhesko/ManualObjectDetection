@@ -13,18 +13,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -lstdc++fs")
 SET (CMAKE_MODULE_LINKER_FLAGS ${CMAKE_MODULE_LINKER_FLAGS_INIT} $ENV{LDFLAGS}
      CACHE STRING "Flags used by the linker during the creation of modules.")
 
-find_path(AVCODEC_INCLUDE_DIR libavcodec/avcodec.h)
-find_library(AVCODEC_LIBRARY avcodec)
-
-find_path(AVFORMAT_INCLUDE_DIR libavformat/avformat.h)
-find_library(AVFORMAT_LIBRARY avformat)
-
-find_path(AVUTIL_INCLUDE_DIR libavutil/avutil.h)
-find_library(AVUTIL_LIBRARY avutil)
-
-find_path(AVDEVICE_INCLUDE_DIR libavdevice/avdevice.h)
-find_library(AVDEVICE_LIBRARY avdevice)
-
 include_directories(${OpenCV_DIR})
 
 set(SOURCE_FILES ManualObjectDetection.cpp Application.h Application.cpp
