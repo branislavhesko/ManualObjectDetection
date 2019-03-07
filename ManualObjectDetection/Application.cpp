@@ -25,6 +25,7 @@ void Application::run(const std::string & videoFilePath, int secondToStart, int 
 	writer = new Writer("./detected.csv");
 	inicializeCategoryChecker();
 	while (!endApplication) {
+		currentFrameBoundingBoxes.clear();
 		processFrame(videoLoader->getNextFrame());
 	}
 	delete writer;
@@ -92,6 +93,7 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 		cv::setMouseCallback(boundingBoxPickerWindowName, mouseCallbackFunction, &ms);
 
 		cvui::update();
+		insertDetectedBoundingBoxes(frame);
 		cv::rectangle(frameWithRectangle, ms.toRectangle(), cv::Scalar(0, 255, 0));
 		cv::imshow(boundingBoxPickerWindowName, frameWithRectangle);
 		if (cv::waitKey(30) == 27) {
@@ -110,7 +112,9 @@ void Application::processFrame(cv::Mat & frame)
 	while (true) {
 		cv::Rect rect = depictBoundingBox(frame);
 		std::string objectClass = pickClass();
-		writer->writeBoundingBox(BoundingBox(videoLoader->getVideoName(), videoLoader->getFrameNumber(), objectClass, rect));
+		BoundingBox box(videoLoader->getVideoName(), videoLoader->getFrameNumber(), objectClass, rect);
+		currentFrameBoundingBoxes.push_back(box);
+		writer->writeBoundingBox(box);
 		if (!addAnotherObject) {
 			break;
 		}
@@ -121,6 +125,20 @@ void Application::inicializeCategoryChecker()
 {
 	for (int i = 0; i < loader.getClasses().size(); i++) {
 		categoryChecker.push_back(new bool(false));
+	}
+}
+
+void Application::insertDetectedBoundingBoxes(cv::Mat &frame) {
+	for (auto &box : currentFrameBoundingBoxes) {
+		cv::Rect rect(box.x, box.y, box.width, box.height);
+		cv::rectangle(frame, rect, cv::Scalar(0, 0, 255));
+		cv::putText(frame, //target image
+					box.objectClass, //text
+					cv::Point(box.x, box.y - 5), //top-left position
+					cv::FONT_HERSHEY_DUPLEX,
+					0.5,
+					CV_RGB(255, 0, 0), //font color
+					1);
 	}
 }
 

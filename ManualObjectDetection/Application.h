@@ -30,12 +30,14 @@ private:
 	ClassLoader loader;
 	WindowSize size = WindowSize(640, 480);
 	std::vector<bool*> categoryChecker;
+	std::vector<BoundingBox> currentFrameBoundingBoxes;
 	bool addAnotherObject, endApplication=false;
 
 	const std::string boundingBoxPickerWindowName = "Bounding box picker";
 	const std::string classPickerFrameName = "Class picker";
 	void processFrame(cv::Mat &frame);
 	void inicializeCategoryChecker();
+	void insertDetectedBoundingBoxes(cv::Mat &frame);
 	std::string & pickClass();
 	std::string & getPickedClassName();
 	cv::Rect depictBoundingBox(cv::Mat & frame);
