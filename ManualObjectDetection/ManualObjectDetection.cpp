@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	//const cv::String windows[] = { WINDOW1_NAME, WINDOW2_NAME, WINDOW3_NAME, WINDOW4_NAME };
 	//cvui::init(windows, 4);
 	Application app(WindowSize(800, 600));
-	std::string videoFile = "./1.avi";
+	std::string videoFile = "./1.mp4";
 	if (argc > 1) {
 		videoFile = std::string(argv[1]);
 		std::cout << videoFile << std::endl;

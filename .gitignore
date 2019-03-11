@@ -1,4 +1,6 @@
 .vs/*
+utils/.vscode/*
+utils/.pytest_cache/*
 *.tlog
 *.log
 *.obj
@@ -9,3 +11,8 @@
 *.tlog
 *.idb
 *.pch
+*.iml
+*.xml
+*.cmake
+*.make
+ManualObjectDetection/cmake-build-debug/*

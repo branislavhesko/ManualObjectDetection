@@ -136,9 +136,9 @@ void Application::insertDetectedBoundingBoxes(cv::Mat &frame) {
 					box.objectClass, //text
 					cv::Point(box.x, box.y - 5), //top-left position
 					cv::FONT_HERSHEY_DUPLEX,
-					0.5,
+					0.5, // font-size
 					CV_RGB(255, 0, 0), //font color
-					1);
+					1); // font width factor.
 	}
 }
 
