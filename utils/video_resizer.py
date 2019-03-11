@@ -8,7 +8,8 @@ from scipy.misc import imresize
 def resize_video(filename, size, output_filename=None):
     size = tuple([int(s) for s in size])
     video = cv2.VideoCapture(filename)
-    output_video = cv2.VideoWriter(output_filename, apiPreference=int(cv2.CAP_FFMPEG), fps=int(video.get(cv2.CAP_PROP_FPS)), fourcc=cv2.VideoWriter_fourcc(*"MJPG"), frameSize=size[-1::-1])
+    print(video.get(cv2.CAP_PROP_FOURCC))
+    output_video = cv2.VideoWriter(output_filename, apiPreference=int(cv2.CAP_FFMPEG), fps=int(video.get(cv2.CAP_PROP_FPS)), fourcc=cv2.VideoWriter_fourcc(*"PIM1"), frameSize=size[-1::-1])
     if not video.isOpened():
         raise IOError("Video could not be loaded")
 
