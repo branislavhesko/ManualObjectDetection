@@ -10,23 +10,17 @@ FrameLoader::FrameLoader(const std::string &videofilename, int secondToStart, in
 	if (!video.isOpened()) {
 		exit(-5116);
 	}
-	width = video.get(cv::CAP_PROP_FRAME_WIDTH);
-	height = video.get(cv::CAP_PROP_FRAME_HEIGHT);
-	numberOfFrames = video.get(cv::CAP_PROP_FRAME_COUNT);
-	double fps = video.get(cv::CAP_PROP_FPS);
+	width = (int)video.get(cv::CAP_PROP_FRAME_WIDTH);
+	height = (int)video.get(cv::CAP_PROP_FRAME_HEIGHT);
+	numberOfFrames = (int)video.get(cv::CAP_PROP_FRAME_COUNT);
+	fps = (int)video.get(cv::CAP_PROP_FPS);
 	video.set(cv::CAP_PROP_POS_FRAMES, secondToStart * fps);
 	this->step = stepSeconds * int(fps);
 }
 
-FrameLoader::FrameLoader()
-{
-}
+FrameLoader::FrameLoader()=default;
 
-
-FrameLoader::~FrameLoader()
-{
-	// delete video;
-}
+FrameLoader::~FrameLoader()=default;
 
 cv::Mat & FrameLoader::getNextFrame()
 {
@@ -40,4 +34,8 @@ cv::Mat & FrameLoader::getNextFrame()
 		}
 	}
 	return frame;
+}
+
+int FrameLoader::getFps() const {
+    return fps;
 }

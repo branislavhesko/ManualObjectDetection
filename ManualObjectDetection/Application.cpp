@@ -11,11 +11,11 @@ Application::~Application()
 		delete flag;
 	}
 	delete videoLoader;
+	delete writer;
 }
 
-Application::Application(const WindowSize size)
+Application::Application(WindowSize size)
 {
-
 }
 
 void Application::run(const std::string & videoFilePath, int secondToStart, int step)
@@ -32,7 +32,7 @@ void Application::run(const std::string & videoFilePath, int secondToStart, int 
 
 }
 
-std::string & Application::pickClass()
+std::string Application::pickClass()
 {
 	cv::namedWindow(classPickerFrameName);
 	cv::moveWindow(classPickerFrameName, 1000, 100);
@@ -46,17 +46,17 @@ std::string & Application::pickClass()
 		frame = cv::Scalar(49, 52, 49);
 		i = 0;
 		for (const auto &entry : loader.getClasses()) {
-			cvui::checkbox(frame, 50, i * 100 + 50, entry, categoryChecker[i]);
+			cvui::checkbox(frame, 50, i * 50 + 50, entry, categoryChecker[i]);
 			i++;
 		}
-		if (cvui::button(frame, 220, i * 100 + 50, "ALL OBJECTS FOUND")) {
+		if (cvui::button(frame, 220, i * 50 + 50, "ALL OBJECTS FOUND")) {
 			break;
 		}
-		if (cvui::button(frame, 50, i * 100 + 50, "ADD ANOTHER")) {
+		if (cvui::button(frame, 50, i * 50 + 50, "ADD ANOTHER")) {
 			addAnotherObject = true;
 			break;
 		}
-		if (cvui::button(frame, 50, (i +1 ) * 100 + 50, "END APPLICATION")) {
+		if (cvui::button(frame, 50, (i +1 ) * 50 + 50, "END APPLICATION")) {
 			endApplication = true;
 			break;
 		}
@@ -68,9 +68,9 @@ std::string & Application::pickClass()
 	return getPickedClassName();
 }
 
-std::string & Application::getPickedClassName()
+std::string Application::getPickedClassName()
 {
-	static std::string pickedClass = "None";
+	std::string pickedClass = "None";
 	for (int i = 0; i < categoryChecker.size(); i++) {
 		if (*categoryChecker[i] == true) {
 			pickedClass = loader.getClasses()[i];
@@ -109,12 +109,13 @@ void Application::processFrame(cv::Mat & frame)
 	if (frame.size().height == 0 | frame.size().width == 0) {
 		exit(-1);
 	}
+	cv::Mat original_frame = frame.clone();
 	while (true) {
 		cv::Rect rect = depictBoundingBox(frame);
 		std::string objectClass = pickClass();
 		BoundingBox box(videoLoader->getVideoName(), videoLoader->getFrameNumber(), objectClass, rect);
 		currentFrameBoundingBoxes.push_back(box);
-		writer->writeBoundingBox(box);
+        writer->writeBoundingBox(box, original_frame);
 		if (!addAnotherObject) {
 			break;
 		}

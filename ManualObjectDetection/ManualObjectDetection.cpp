@@ -24,7 +24,6 @@ int main(int argc, char **argv)
 	if (argc > 3) {
 		stepSeconds = std::stoi(argv[3]);
 	}
-
 	app.run(videoFile, secondToStart, stepSeconds);
 }
 

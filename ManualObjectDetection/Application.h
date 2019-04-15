@@ -9,6 +9,7 @@
 #include "mouseCallback.h"
 #include "Writer.h"
 
+
 struct WindowSize {
 	unsigned int width;
 	unsigned int height;
@@ -18,12 +19,13 @@ struct WindowSize {
 	}
 };
 
+
 class Application
 {
 public:
 	Application();
 	~Application();
-	Application(const WindowSize size);
+	explicit Application(WindowSize size);
 	void run(const std::string &videoFilePath, int secondToStart, int step);
 private:
 	FrameLoader *videoLoader;
@@ -38,8 +40,8 @@ private:
 	void processFrame(cv::Mat &frame);
 	void inicializeCategoryChecker();
 	void insertDetectedBoundingBoxes(cv::Mat &frame);
-	std::string & pickClass();
-	std::string & getPickedClassName();
+	std::string pickClass();
+	std::string getPickedClassName();
 	cv::Rect depictBoundingBox(cv::Mat & frame);
 	Writer *writer;
 };

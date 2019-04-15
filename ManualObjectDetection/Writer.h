@@ -38,10 +38,11 @@ class Writer
 public:
 	Writer();
 	~Writer();
-	Writer(const std::string &filename);
-	bool writeBoundingBox(const BoundingBox &box);
+	explicit Writer(const std::string &filename);
+	bool writeBoundingBox(const BoundingBox &box, const cv::Mat &image);
 private:
 	const std::string FILETOSAVE = "./detected.txt";
 	std::fstream file;
+	const std::string PATH_TO_SAVE_IMAGES = "./images/";
 };
 

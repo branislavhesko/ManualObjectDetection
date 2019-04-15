@@ -28,7 +28,9 @@ public:
 		return videoName;
 	}
 
-	cv::Mat &getNextFrame();
+    int getFps() const;
+
+    cv::Mat &getNextFrame();
 private:
 	cv::VideoCapture video;
 	unsigned int frameNumber = 0;
@@ -36,6 +38,7 @@ private:
 	int width;
 	int height;
 	int step;
+	int fps;
 	std::string videoName;
 };
 
