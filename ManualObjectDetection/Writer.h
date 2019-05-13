@@ -2,8 +2,13 @@
 
 #include <string>
 #include <iostream>
+#include "stdio.h"
 #include <fstream>
+#include "time.h"
 #include "opencv2/opencv.hpp"
+#include <experimental/filesystem>
+namespace fs=std::experimental::filesystem;
+using std::chrono::system_clock;
 
 struct BoundingBox {
 	std::string filename;
@@ -44,5 +49,7 @@ private:
 	const std::string FILETOSAVE = "./detected.txt";
 	std::fstream file;
 	const std::string PATH_TO_SAVE_IMAGES = "./images/";
+	std::string get_time();
+	std::string time_program_started;
 };
 
