@@ -28,8 +28,6 @@ void Application::run(const std::string & videoFilePath, int secondToStart, int 
 		currentFrameBoundingBoxes.clear();
 		processFrame(videoLoader->getNextFrame());
 	}
-	delete writer;
-
 }
 
 std::string Application::pickClass()
@@ -42,8 +40,13 @@ std::string Application::pickClass()
 	unsigned int size = loader.getClasses().size();
 	addAnotherObject = false;
 	int i = 0;
-	while (cv::waitKey(20) != 27) {
-		frame = cv::Scalar(49, 52, 49);
+	bool ESC_PRESSED = false;
+	while (!ESC_PRESSED) {
+        int key = cv::waitKey(20);
+        if (key == 27) {
+            ESC_PRESSED = true;
+        }
+	    frame = cv::Scalar(49, 52, 49);
 		i = 0;
 		for (const auto &entry : loader.getClasses()) {
 			cvui::checkbox(frame, 50, i * 50 + 50, entry, categoryChecker[i]);
@@ -96,8 +99,12 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 		insertDetectedBoundingBoxes(frame);
 		cv::rectangle(frameWithRectangle, ms.toRectangle(), cv::Scalar(0, 255, 0));
 		cv::imshow(boundingBoxPickerWindowName, frameWithRectangle);
-		if (cv::waitKey(30) == 27) {
+        int key = cv::waitKeyEx(30);
+
+        if (key == 1048603) {
 			break;
+		} else if (key == 1113939) {
+		    return cv::Rect(0, 0, -1, -1);
 		}
 	}
 	cv::setMouseCallback(boundingBoxPickerWindowName, nullptr, nullptr);
@@ -112,6 +119,9 @@ void Application::processFrame(cv::Mat & frame)
 	cv::Mat original_frame = frame.clone();
 	while (true) {
 		cv::Rect rect = depictBoundingBox(frame);
+		if (!isRectangleValid(rect)) {
+		    break;
+		}
 		std::string objectClass = pickClass();
 		BoundingBox box(videoLoader->getVideoName(), videoLoader->getFrameNumber(), objectClass, rect);
 		currentFrameBoundingBoxes.push_back(box);
@@ -141,6 +151,10 @@ void Application::insertDetectedBoundingBoxes(cv::Mat &frame) {
 					CV_RGB(255, 0, 0), //font color
 					1); // font width factor.
 	}
+}
+
+bool Application::isRectangleValid(cv::Rect &rect) {
+    return !(rect.height < 0 | rect.width < 0);
 }
 
 

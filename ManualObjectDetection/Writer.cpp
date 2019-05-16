@@ -24,7 +24,8 @@ bool Writer::writeBoundingBox(const BoundingBox &box, const cv::Mat &image)
 	std::cout << line << std::endl;
 	file << line;
 
-	std::string image_path = PATH_TO_SAVE_IMAGES + box.filename + "_" + std::to_string(box.frameNumber) + ".png";
+	std::string image_path = PATH_TO_SAVE_IMAGES + box.filename + "_" +
+	        std::to_string(box.frameNumber) + "_" + time_program_started + ".png";
 
 	if (!fs::exists(image_path)) {
 	    std::cout << "FILE: " << image_path << " does not exists!" << std::endl;

@@ -16,8 +16,8 @@ int main(int argc, char **argv)
 		videoFile = std::string(argv[1]);
 		std::cout << videoFile << std::endl;
 	}
-	int secondToStart = 0;
-	int stepSeconds = 1;
+	int secondToStart = 50;
+	int stepSeconds = 10;
 	if (argc > 2) {
 		secondToStart = std::stoi(argv[2]);
 	}

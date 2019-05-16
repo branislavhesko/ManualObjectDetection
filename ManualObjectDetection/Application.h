@@ -34,7 +34,7 @@ private:
 	std::vector<bool*> categoryChecker;
 	std::vector<BoundingBox> currentFrameBoundingBoxes;
 	bool addAnotherObject, endApplication=false;
-
+    bool isRectangleValid(cv::Rect &);
 	const std::string boundingBoxPickerWindowName = "Bounding box picker";
 	const std::string classPickerFrameName = "Class picker";
 	void processFrame(cv::Mat &frame);
