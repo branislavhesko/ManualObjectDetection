@@ -33,10 +33,10 @@ void Application::run(const std::string & videoFilePath, int secondToStart, int 
 std::string Application::pickClass()
 {
 	cv::namedWindow(classPickerFrameName);
-	cv::moveWindow(classPickerFrameName, 1000, 100);
+	cv::moveWindow(classPickerFrameName, 1300, 10);
 	cvui::init(classPickerFrameName);
 	//cvui::watch(classPickerFrameName);
-	cv::Mat frame = cv::Mat((2 + loader.getClasses().size()) * 100, 400, CV_8UC3);
+	cv::Mat frame = cv::Mat((2 + loader.getClasses().size()) * 40, 400, CV_8UC3);
 	unsigned int size = loader.getClasses().size();
 	addAnotherObject = false;
 	int i = 0;
@@ -49,17 +49,17 @@ std::string Application::pickClass()
 	    frame = cv::Scalar(49, 52, 49);
 		i = 0;
 		for (const auto &entry : loader.getClasses()) {
-			cvui::checkbox(frame, 50, i * 50 + 50, entry, categoryChecker[i]);
+			cvui::checkbox(frame, 50, i * 20 + 50, entry, categoryChecker[i]);
 			i++;
 		}
-		if (cvui::button(frame, 220, i * 50 + 50, "ALL OBJECTS FOUND")) {
+		if (cvui::button(frame, 220, i * 20 + 100, "ALL OBJECTS FOUND")) {
 			break;
 		}
-		if (cvui::button(frame, 50, i * 50 + 50, "ADD ANOTHER")) {
+		if (cvui::button(frame, 50, i * 20 + 100, "ADD ANOTHER")) {
 			addAnotherObject = true;
 			break;
 		}
-		if (cvui::button(frame, 50, (i +1 ) * 50 + 50, "END APPLICATION")) {
+		if (cvui::button(frame, 50, (i +2) * 20 + 100, "END APPLICATION")) {
 			endApplication = true;
 			break;
 		}
@@ -87,7 +87,7 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 {
 	cv::Mat frameWithRectangle;
 	cv::namedWindow(boundingBoxPickerWindowName);
-	cv::moveWindow(boundingBoxPickerWindowName, 100, 100);
+	cv::moveWindow(boundingBoxPickerWindowName, 10, 10);
 	MouseCallbackDataStructure ms(0, 0, 0, 0);
 	cvui::init(boundingBoxPickerWindowName);
 	while (true) {
