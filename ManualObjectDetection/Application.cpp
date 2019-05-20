@@ -100,7 +100,6 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 		cv::rectangle(frameWithRectangle, ms.toRectangle(), cv::Scalar(0, 255, 0));
 		cv::imshow(boundingBoxPickerWindowName, frameWithRectangle);
         int key = cv::waitKeyEx(30);
-        std::cout << key << std::endl;
         if (key == 27) {
 			break;
 		} else if (key == 2555904) {
