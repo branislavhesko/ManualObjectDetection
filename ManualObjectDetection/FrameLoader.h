@@ -40,5 +40,6 @@ private:
 	int step;
 	int fps;
 	std::string videoName;
+	const cv::Size PROCESSED_SIZE = cv::Size(1280, 720);
 };
 

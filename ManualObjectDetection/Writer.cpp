@@ -42,6 +42,6 @@ std::string Writer::get_time() {
     time (&rawtime);
     timeinfo = localtime (&rawtime);
 
-    strftime (buffer,80,"%d_%m_%y:%I_%M_%S",timeinfo);
+    strftime (buffer,80,"%d_%m_%y$%I_%M_%S",timeinfo);
     return std::string(buffer);
 }

@@ -33,6 +33,7 @@ cv::Mat & FrameLoader::getNextFrame()
 			return emptyFrame;
 		}
 	}
+	cv::resize(frame, frame, PROCESSED_SIZE);
 	return frame;
 }
 
