@@ -31,9 +31,10 @@ public:
     int getFps() const;
 
     cv::Mat &getNextFrame();
+    cv::Mat &getPreviousFrame();
 private:
 	cv::VideoCapture video;
-	unsigned int frameNumber = 0;
+	int frameNumber = 0;
 	unsigned int numberOfFrames;
 	int width;
 	int height;

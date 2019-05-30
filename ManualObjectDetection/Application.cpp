@@ -26,7 +26,11 @@ void Application::run(const std::string & videoFilePath, int secondToStart, int 
 	inicializeCategoryChecker();
 	while (!endApplication) {
 		currentFrameBoundingBoxes.clear();
-		processFrame(videoLoader->getNextFrame());
+		if (backward_frame) {
+            processFrame(videoLoader->getPreviousFrame());
+		} else {
+            processFrame(videoLoader->getNextFrame());
+        }
 	}
 }
 
@@ -104,7 +108,10 @@ cv::Rect Application::depictBoundingBox(cv::Mat & frame)
 			break;
 		} else if (key == 2555904) {
 		    return cv::Rect(0, 0, -1, -1);
-		}
+		} else if (key == 2424832) {
+            backward_frame = true;
+            return cv::Rect(0, 0, -1, -1);
+        }
 	}
 	cv::setMouseCallback(boundingBoxPickerWindowName, nullptr, nullptr);
 	return ms.toRectangle();
@@ -115,7 +122,8 @@ void Application::processFrame(cv::Mat & frame)
 	if (frame.size().height == 0 | frame.size().width == 0) {
 		exit(-1);
 	}
-	cv::Mat original_frame = frame.clone();
+    backward_frame = false;
+    cv::Mat original_frame = frame.clone();
 	while (true) {
 		cv::Rect rect = depictBoundingBox(frame);
 		if (!isRectangleValid(rect)) {

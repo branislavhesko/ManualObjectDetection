@@ -44,6 +44,7 @@ private:
 	std::string getPickedClassName();
 	cv::Rect depictBoundingBox(cv::Mat & frame);
 	Writer *writer;
+	bool backward_frame = false;
 };
 
 

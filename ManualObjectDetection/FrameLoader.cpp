@@ -26,17 +26,29 @@ cv::Mat & FrameLoader::getNextFrame()
 {
 	static cv::Mat frame;
 	static cv::Mat emptyFrame(0, 0, CV_8UC1);
-	for (int i = 0; i < step; i++) {
-		video >> frame;
-		frameNumber++;
-		if (frameNumber == numberOfFrames) {
-			return emptyFrame;
-		}
-	}
+	frameNumber += step;
+    if (frameNumber > numberOfFrames) {
+        return emptyFrame;
+    }
+    video.set(cv::CAP_PROP_POS_FRAMES, frameNumber);
+    video >> frame;
 	cv::resize(frame, frame, PROCESSED_SIZE);
 	return frame;
 }
 
 int FrameLoader::getFps() const {
     return fps;
+}
+
+cv::Mat &FrameLoader::getPreviousFrame() {
+    static cv::Mat frame;
+    frameNumber -= step;
+
+    if (frameNumber < 0) {
+        frameNumber = 0;
+    }
+    video.set(cv::CAP_PROP_POS_FRAMES, frameNumber);
+    video >> frame;
+    cv::resize(frame, frame, PROCESSED_SIZE);
+    return frame;
 }
