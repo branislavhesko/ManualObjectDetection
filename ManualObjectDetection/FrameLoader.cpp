@@ -52,3 +52,20 @@ cv::Mat &FrameLoader::getPreviousFrame() {
     cv::resize(frame, frame, PROCESSED_SIZE);
     return frame;
 }
+
+const void FrameLoader::setPosition(unsigned int frameNumberToSet) {
+    if (frameNumberToSet > numberOfFrames)
+    {
+        frameNumberToSet = 0;
+    }
+    frameNumber = frameNumberToSet;
+    video.set(cv::CAP_PROP_POS_FRAMES, frameNumberToSet);
+}
+
+unsigned int FrameLoader::getNumberOfFrames() const {
+    return numberOfFrames;
+}
+
+int FrameLoader::getStep() const {
+    return step;
+}

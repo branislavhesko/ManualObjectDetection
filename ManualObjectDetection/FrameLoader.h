@@ -21,12 +21,16 @@ public:
 	const std::string &getVideoName() const {
 		return videoName;
 	}
-	const unsigned int getFrameNumber() {
+	const unsigned int getFrameNumber() const{
 		return frameNumber;
 	}
 	const std::string &getVideoName() {
 		return videoName;
 	}
+
+    int getStep() const;
+
+    const void setPosition(unsigned int frame);
 
     int getFps() const;
 
@@ -36,7 +40,11 @@ private:
 	cv::VideoCapture video;
 	int frameNumber = 0;
 	unsigned int numberOfFrames;
-	int width;
+public:
+    unsigned int getNumberOfFrames() const;
+
+private:
+    int width;
 	int height;
 	int step;
 	int fps;

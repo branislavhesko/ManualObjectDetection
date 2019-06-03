@@ -40,8 +40,9 @@ std::string Application::pickClass()
 	cv::moveWindow(classPickerFrameName, 1300, 10);
 	cvui::init(classPickerFrameName);
 	//cvui::watch(classPickerFrameName);
-	cv::Mat frame = cv::Mat((2 + loader.getClasses().size()) * 40, 400, CV_8UC3);
+	cv::Mat frame = cv::Mat((2 + loader.getClasses().size()) * 40, 500, CV_8UC3);
 	unsigned int size = loader.getClasses().size();
+    auto frameNumberTrackbar = (double) videoLoader->getFrameNumber();
 	addAnotherObject = false;
 	int i = 0;
 	bool ESC_PRESSED = false;
@@ -49,6 +50,10 @@ std::string Application::pickClass()
         int key = cv::waitKey(20);
         if (key == 27) {
             ESC_PRESSED = true;
+        }
+        if (key == 115) {
+            videoLoader->setPosition((unsigned int) frameNumberTrackbar - (unsigned int)videoLoader->getStep());
+            break;
         }
 	    frame = cv::Scalar(49, 52, 49);
 		i = 0;
@@ -67,6 +72,8 @@ std::string Application::pickClass()
 			endApplication = true;
 			break;
 		}
+		cvui::text(frame, 50, i * 20 + 180, "Please press S to set frame according to the trackbar");
+		cvui::trackbar(frame, 50, i*20 + 200, 200, &frameNumberTrackbar, 0., (double)videoLoader->getNumberOfFrames());
 		cvui::update();
 		// Show everything on the screen
 		cv::imshow(classPickerFrameName, frame);
