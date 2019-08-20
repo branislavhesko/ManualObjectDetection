@@ -20,9 +20,9 @@ SET (CMAKE_MODULE_LINKER_FLAGS ${CMAKE_MODULE_LINKER_FLAGS_INIT} $ENV{LDFLAGS}
 
 include_directories(${OpenCV_DIR})
 
-set(SOURCE_FILES ManualObjectDetection.cpp Application.h Application.cpp
-        ClassLoader.cpp ClassLoader.h cvui.h FrameLoader.h FrameLoader.cpp mouseCallback.h
-        pch.cpp pch.h Writer.cpp Writer.h)
+set(SOURCE_FILES ManualObjectDetection.cpp include/Application.h src/Application.cpp
+        src/ClassLoader.cpp include/ClassLoader.h include/cvui.h include/LoadImagesFromVideo.h src/LoadImagesFromVideo.cpp include/mouseCallback.h
+        src/pch.cpp include/pch.h src/Writer.cpp include/Writer.h src/LoadImagesFromDirectory.cpp include/LoadImagesFromDirectory.h src/LoadImages.cpp include/LoadImages.h)
 add_executable(ManualObjectDetection ${SOURCE_FILES})
 
 target_link_libraries(ManualObjectDetection ${OpenCV_LIBS})

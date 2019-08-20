@@ -1,9 +1,9 @@
 // ManualObjectDetection.cpp : This file contains the 'main' function. Program execution begins and ends there.
-#include "pch.h"
+#include "include/pch.h"
 #include <iostream>
-#include "Application.h"
+#include "include/Application.h"
 #define CVUI_IMPLEMENTATION
-#include "cvui.h"
+#include "include/cvui.h"
 
 
 int main(int argc, char **argv)
@@ -16,7 +16,8 @@ int main(int argc, char **argv)
 		videoFile = std::string(argv[1]);
 		std::cout << videoFile << std::endl;
 	}
-	int secondToStart = 50;
+
+	int secondToStart = 0;
 	int stepSeconds = 10;
 	if (argc > 2) {
 		secondToStart = std::stoi(argv[2]);
@@ -24,6 +25,7 @@ int main(int argc, char **argv)
 	if (argc > 3) {
 		stepSeconds = std::stoi(argv[3]);
 	}
+	std::cout << "Application has started!" << std::endl;
 	app.run(videoFile, secondToStart, stepSeconds);
 }
 

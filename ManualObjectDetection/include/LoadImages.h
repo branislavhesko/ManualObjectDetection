@@ -1,0 +1,14 @@
+//
+// Created by brani on 20.08.19.
+//
+
+#ifndef MANUALOBJECTDETECTION_LOADIMAGES_H
+#define MANUALOBJECTDETECTION_LOADIMAGES_H
+
+
+class LoadImages {
+
+};
+
+
+#endif //MANUALOBJECTDETECTION_LOADIMAGES_H

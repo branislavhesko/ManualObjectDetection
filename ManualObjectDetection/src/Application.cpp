@@ -1,5 +1,5 @@
-#include "pch.h"
-#include "Application.h"
+#include "../include/pch.h"
+#include "../include/Application.h"
 
 
 Application::Application() = default;
@@ -20,7 +20,7 @@ Application::Application(WindowSize size)
 
 void Application::run(const std::string & videoFilePath, int secondToStart, int step)
 {
-	videoLoader = new FrameLoader(videoFilePath, secondToStart, step);
+	videoLoader = new LoadImagesFromVideo(videoFilePath, secondToStart, step);
 	loader.loadClasses();
 	writer = new Writer("./detected.csv");
 	inicializeCategoryChecker();

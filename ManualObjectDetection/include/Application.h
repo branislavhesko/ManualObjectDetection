@@ -5,9 +5,12 @@
 #include "opencv2/opencv.hpp"
 #include "cvui.h"
 #include "ClassLoader.h"
-#include "FrameLoader.h"
+#include "LoadImagesFromVideo.h"
 #include "mouseCallback.h"
 #include "Writer.h"
+#include "LoadImagesFromDirectory.h"
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 
 
 struct WindowSize {
@@ -28,7 +31,7 @@ public:
 	explicit Application(WindowSize size);
 	void run(const std::string &videoFilePath, int secondToStart, int step);
 private:
-	FrameLoader *videoLoader;
+	LoadImagesFromVideo *videoLoader;
 	ClassLoader loader;
 	WindowSize size = WindowSize(640, 480);
 	std::vector<bool*> categoryChecker;

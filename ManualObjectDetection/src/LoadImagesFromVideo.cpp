@@ -1,8 +1,8 @@
-#include "pch.h"
-#include "FrameLoader.h"
+#include "../include/pch.h"
+#include "../include/LoadImagesFromVideo.h"
 
 
-FrameLoader::FrameLoader(const std::string &videofilename, int secondToStart, int stepSeconds)
+LoadImagesFromVideo::LoadImagesFromVideo(const std::string &videofilename, int secondToStart, int stepSeconds)
 {
 	videoName = fs::path(videofilename).stem().string();
 	std::cout << videoName << std::endl;
@@ -18,11 +18,11 @@ FrameLoader::FrameLoader(const std::string &videofilename, int secondToStart, in
 	this->step = stepSeconds * int(fps);
 }
 
-FrameLoader::FrameLoader()=default;
+LoadImagesFromVideo::LoadImagesFromVideo()=default;
 
-FrameLoader::~FrameLoader()=default;
+LoadImagesFromVideo::~LoadImagesFromVideo()=default;
 
-cv::Mat & FrameLoader::getNextFrame()
+cv::Mat & LoadImagesFromVideo::getNextFrame()
 {
 	static cv::Mat frame;
 	static cv::Mat emptyFrame(0, 0, CV_8UC1);
@@ -36,11 +36,11 @@ cv::Mat & FrameLoader::getNextFrame()
 	return frame;
 }
 
-int FrameLoader::getFps() const {
+int LoadImagesFromVideo::getFps() const {
     return fps;
 }
 
-cv::Mat &FrameLoader::getPreviousFrame() {
+cv::Mat &LoadImagesFromVideo::getPreviousFrame() {
     static cv::Mat frame;
     frameNumber -= step;
 
@@ -53,7 +53,7 @@ cv::Mat &FrameLoader::getPreviousFrame() {
     return frame;
 }
 
-const void FrameLoader::setPosition(unsigned int frameNumberToSet) {
+const void LoadImagesFromVideo::setPosition(unsigned int frameNumberToSet) {
     if (frameNumberToSet > numberOfFrames)
     {
         frameNumberToSet = 0;
@@ -62,10 +62,10 @@ const void FrameLoader::setPosition(unsigned int frameNumberToSet) {
     video.set(cv::CAP_PROP_POS_FRAMES, frameNumberToSet);
 }
 
-unsigned int FrameLoader::getNumberOfFrames() const {
+unsigned int LoadImagesFromVideo::getNumberOfFrames() const {
     return numberOfFrames;
 }
 
-int FrameLoader::getStep() const {
+int LoadImagesFromVideo::getStep() const {
     return step;
 }

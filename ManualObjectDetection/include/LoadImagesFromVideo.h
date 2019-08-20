@@ -6,12 +6,12 @@
 namespace fs = std::experimental::filesystem;
 
 
-class FrameLoader
+class LoadImagesFromVideo
 {
 public:
-	FrameLoader(const std::string &videofile, int secondToStart, int stepSeconds);
-	FrameLoader();
-	~FrameLoader();
+	LoadImagesFromVideo(const std::string &videofile, int secondToStart, int stepSeconds);
+	LoadImagesFromVideo();
+	~LoadImagesFromVideo();
 	const int getWidth() const {
 		return width;
 	}
