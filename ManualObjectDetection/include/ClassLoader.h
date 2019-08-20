@@ -15,7 +15,7 @@ public:
 		return classes;
 	}
 private:
-	const std::string CLASSFILE = "./classes.txt";
+	const std::string CLASSFILE = "../settings/classes.txt";
 	std::vector<std::string> classes;
 };
 

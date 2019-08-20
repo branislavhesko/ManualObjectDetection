@@ -1,0 +1,16 @@
+Dopravna znacka - Prikazova
+Dopravna znacka - Zakazova
+Dopravna znacka - Vystrazna
+Dopravna znacka - Prikazova (bez retroreflexe)
+Dopravna znacka - Zakazova (bez retroreflexe)
+Dopravna znacka - Vystrazna (bez retroreflexe)
+Dopravna znacka - Ostatne
+Billboard/bigboard
+Maly reklamny putac
+Chodec
+Auto
+Motorka
+Nakladak/autobus
+Cyklista
+Navest
+Semafor
