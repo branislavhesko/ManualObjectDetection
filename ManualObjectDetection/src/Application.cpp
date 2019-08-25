@@ -10,7 +10,6 @@ Application::~Application()
 	for (auto *flag : categoryChecker) {
 		delete flag;
 	}
-	delete videoLoader;
 	delete writer;
 }
 
@@ -18,9 +17,14 @@ Application::Application(WindowSize size)
 {
 }
 
-void Application::run(const std::string & videoFilePath, int secondToStart, int step)
+void Application::run(std::string &videoFilePath, int secondToStart, int step)
 {
-	videoLoader = new LoadImagesFromVideo(videoFilePath, secondToStart, step);
+    if (fs::is_directory(videoFilePath)) {
+        videoLoader = std::make_unique<LoadImagesFromDirectory>(videoFilePath);
+    } else {
+        videoLoader = std::make_unique<LoadImagesFromVideo>(videoFilePath, secondToStart, step);
+
+    }
 	loader.loadClasses();
 	writer = new Writer("./detected.csv");
 	inicializeCategoryChecker();

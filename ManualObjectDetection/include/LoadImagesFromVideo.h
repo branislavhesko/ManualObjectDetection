@@ -5,27 +5,26 @@
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
+#include "LoadImages.h"
 
-class LoadImagesFromVideo
+
+class LoadImagesFromVideo: public LoadImages
 {
 public:
-	LoadImagesFromVideo(const std::string &videofile, int secondToStart, int stepSeconds);
-	LoadImagesFromVideo();
+	LoadImagesFromVideo(std::string &videofilename, int secondToStart, int stepSeconds);
 	~LoadImagesFromVideo();
-	const int getWidth() const {
+	unsigned getWidth() const {
 		return width;
 	}
-	const int getHeight() const {
+	unsigned getHeight() const {
 		return height;
 	}
 	const std::string &getVideoName() const {
-		return videoName;
+		return path;
 	}
-	const unsigned int getFrameNumber() const{
+
+    unsigned getFrameNumber() const{
 		return frameNumber;
-	}
-	const std::string &getVideoName() {
-		return videoName;
 	}
 
     int getStep() const;
@@ -44,11 +43,8 @@ public:
     unsigned int getNumberOfFrames() const;
 
 private:
-    int width;
-	int height;
-	int step;
-	int fps;
-	std::string videoName;
+	unsigned step;
+	unsigned fps;
 	const cv::Size PROCESSED_SIZE = cv::Size(1280, 720);
 };
 

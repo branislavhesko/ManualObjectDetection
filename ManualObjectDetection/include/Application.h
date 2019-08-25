@@ -8,7 +8,9 @@
 #include "LoadImagesFromVideo.h"
 #include "mouseCallback.h"
 #include "Writer.h"
+#include "LoadImages.h"
 #include "LoadImagesFromDirectory.h"
+#include "LoadImagesFromVideo.h"
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 
@@ -29,9 +31,9 @@ public:
 	Application();
 	~Application();
 	explicit Application(WindowSize size);
-	void run(const std::string &videoFilePath, int secondToStart, int step);
+	void run(std::string &videoFilePath, int secondToStart, int step);
 private:
-	LoadImagesFromVideo *videoLoader;
+	std::unique_ptr<LoadImages> videoLoader;
 	ClassLoader loader;
 	WindowSize size = WindowSize(640, 480);
 	std::vector<bool*> categoryChecker;

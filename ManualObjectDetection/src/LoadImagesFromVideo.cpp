@@ -2,10 +2,10 @@
 #include "../include/LoadImagesFromVideo.h"
 
 
-LoadImagesFromVideo::LoadImagesFromVideo(const std::string &videofilename, int secondToStart, int stepSeconds)
+LoadImagesFromVideo::LoadImagesFromVideo(std::string &videofilename, int secondToStart, int stepSeconds) : LoadImages(videofilename)
 {
-	videoName = fs::path(videofilename).stem().string();
-	std::cout << videoName << std::endl;
+    path = fs::path(videofilename).stem().string();
+	std::cout << path << std::endl;
 	video.open(videofilename);
 	if (!video.isOpened()) {
 		exit(-5116);
@@ -18,7 +18,6 @@ LoadImagesFromVideo::LoadImagesFromVideo(const std::string &videofilename, int s
 	this->step = stepSeconds * int(fps);
 }
 
-LoadImagesFromVideo::LoadImagesFromVideo()=default;
 
 LoadImagesFromVideo::~LoadImagesFromVideo()=default;
 
