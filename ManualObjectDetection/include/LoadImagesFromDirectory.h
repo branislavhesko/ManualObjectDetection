@@ -15,17 +15,19 @@ class LoadImagesFromDirectory: public LoadImages {
 public:
     explicit LoadImagesFromDirectory(std::string &path) : LoadImages(path) {
         loadImagesInPath();
+        determineImagesDimensions();
     }
-    cv::Mat& getNextFrame() override {
-        cv::Mat mat;
-        return mat;
-    }
+    cv::Mat& getNextFrame() override;
 
     cv::Mat &getPreviousFrame() override;
 
-    unsigned int getNumberOfFrames() const override;
+    unsigned int getNumberOfFrames() const override {
+        return images.size();
+    }
 
-    unsigned int getFrameNumber() const override;
+    unsigned int getFrameNumber() const override {
+        return frameNumber;
+    }
 
     int getStep() const override;
 
@@ -39,7 +41,7 @@ public:
 
 private:
     void loadImagesInPath();
-
+    void determineImagesDimensions();
     std::vector<fs::path> images;
 };
 

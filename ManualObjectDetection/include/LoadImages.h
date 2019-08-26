@@ -29,9 +29,12 @@ public:
 
 
 protected:
+    unsigned frameNumber = 0;
+    unsigned int numberOfFrames;
     std::string path;
     unsigned width;
     unsigned height;
+    const cv::Size PROCESSED_SIZE = cv::Size(1280, 720);
 };
 
 

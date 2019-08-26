@@ -12,17 +12,11 @@ void LoadImagesFromDirectory::loadImagesInPath() {
     }
 }
 
+
+
 cv::Mat &LoadImagesFromDirectory::getPreviousFrame() {
     cv::Mat mat;
     return mat;
-}
-
-unsigned int LoadImagesFromDirectory::getNumberOfFrames() const {
-    return 0;
-}
-
-unsigned int LoadImagesFromDirectory::getFrameNumber() const {
-    return 0;
 }
 
 int LoadImagesFromDirectory::getStep() const {
@@ -42,5 +36,21 @@ const std::string &LoadImagesFromDirectory::getVideoName() const {
 }
 
 const void LoadImagesFromDirectory::setPosition(unsigned frameNumber) {
-    std::cout <<"TODO" <<std::endl;
+    this->frameNumber = frameNumber;
+}
+
+void LoadImagesFromDirectory::determineImagesDimensions() {
+    cv::Mat img = cv::imread(images[0]);
+    width = img.cols;
+    height = img.rows;
+}
+
+cv::Mat &LoadImagesFromDirectory::getNextFrame() {
+        static cv::Mat img;
+        img = cv::imread(images[frameNumber]);
+        cv::resize(img, img, PROCESSED_SIZE);
+        if (++frameNumber == getNumberOfFrames()) {
+            frameNumber = 0;
+        }
+        return img;
 }
