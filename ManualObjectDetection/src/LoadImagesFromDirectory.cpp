@@ -15,8 +15,13 @@ void LoadImagesFromDirectory::loadImagesInPath() {
 
 
 cv::Mat &LoadImagesFromDirectory::getPreviousFrame() {
-    cv::Mat mat;
-    return mat;
+    static cv::Mat img;
+    img = cv::imread(images[frameNumber]);
+    cv::resize(img, img, PROCESSED_SIZE);
+    if (--frameNumber < 0) {
+        frameNumber = getNumberOfFrames() - 1;
+    }
+    return img;
 }
 
 int LoadImagesFromDirectory::getStep() const {
@@ -32,7 +37,9 @@ unsigned int LoadImagesFromDirectory::getHeight() const {
 }
 
 const std::string &LoadImagesFromDirectory::getVideoName() const {
-    return path;
+    static std::string imgName;
+    imgName = fs::path(images[frameNumber]).stem();
+    return imgName;
 }
 
 const void LoadImagesFromDirectory::setPosition(unsigned frameNumber) {
