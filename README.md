@@ -8,7 +8,7 @@ https://dovyski.github.io/cvui/
 
 This library is quite simple and does not add unwanted dependencies.
 
-## Build
+## Build
 
 Prerequisites:
 
