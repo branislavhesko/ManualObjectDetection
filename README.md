@@ -47,7 +47,8 @@ Step is the number of seconds between frames picked from a video, second_to_star
     - file: only for videos.
     - folder: when you want to mark multiple images in that folder.
 
-## Control
+## Control
+
 When only the window with the image is use LEFT MOUSE button to depict bounding box.
 
 Few keyboard shortcuts are usable:
