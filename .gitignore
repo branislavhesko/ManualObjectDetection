@@ -16,3 +16,5 @@ utils/.pytest_cache/*
 *.cmake
 *.make
 ManualObjectDetection/cmake-build-debug/*
+ManualObjectDetection/build/*
+ManualObjectDetection/detected.txt
